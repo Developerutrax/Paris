@@ -1,103 +1,602 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ViajaMás | Agencia de Viajes</title>
-  <style>
-    :root { --navy:#102a43; --blue:#176b87; --teal:#21b6a8; --cream:#f4f8fb; --orange:#ffb454; }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--navy); background:var(--cream); }
-    header { display:flex; justify-content:space-between; align-items:center; padding:20px 7%; background:white; }
-    .logo { font-size:1.5rem; font-weight:800; color:var(--blue); }
-    .logo span { color:var(--teal); }
-    nav a { color:var(--navy); text-decoration:none; margin-left:22px; font-weight:600; }
-    .hero { display:grid; grid-template-columns:1.05fr .95fr; gap:35px; align-items:center; padding:55px 7%; background:linear-gradient(135deg,#e7f7f7,#edf4ff); }
-    .tag { display:inline-block; background:#d5f4ef; color:#087c73; padding:8px 14px; border-radius:30px; font-size:.85rem; font-weight:bold; }
-    h1 { font-size:clamp(2.3rem,5vw,4.3rem); line-height:1.05; margin:18px 0; }
-    h1 span { color:var(--teal); }
-    .hero p { font-size:1.1rem; line-height:1.7; color:#486581; max-width:540px; }
-    .btn { display:inline-block; margin-top:12px; background:var(--blue); color:white; padding:14px 24px; border-radius:10px; text-decoration:none; font-weight:bold; }
-    .hero img { width:100%; border-radius:22px; box-shadow:0 18px 45px #102a4320; }
-    section { padding:55px 7%; }
-    .section-title { text-align:center; margin-bottom:30px; }
-    .section-title h2 { font-size:2rem; margin-bottom:8px; }
-    .section-title p { color:#627d98; }
-    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-    .card { background:white; padding:25px; border-radius:16px; box-shadow:0 8px 24px #102a4310; }
-    .card .emoji { font-size:2rem; }
-    .card h3 { margin:12px 0 8px; }
-    .card p { color:#627d98; line-height:1.55; }
-    .about { background:var(--navy); color:white; text-align:center; }
-    .about p { max-width:760px; margin:12px auto; color:#d9e8f2; line-height:1.7; }
-    footer { text-align:center; padding:22px; background:#071c2c; color:#cbd5e1; font-size:.9rem; }
-    @media(max-width:760px) {
-      header { flex-direction:column; gap:15px; }
-      nav a { margin:0 8px; }
-      .hero { grid-template-columns:1fr; padding-top:35px; }
-      .cards { grid-template-columns:1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ViajaMás | Agencia de Viajes</title>
+
+<style>
+:root {
+  --navy: #102a43;
+  --blue: #176b87;
+  --teal: #21b6a8;
+  --cream: #f4f8fb;
+  --orange: #ffb454;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--navy);
+  background: var(--cream);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7%;
+  background: white;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+
+.logo span {
+  color: var(--teal);
+}
+
+nav a {
+  color: var(--navy);
+  text-decoration: none;
+  margin-left: 18px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--teal);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 35px;
+  align-items: center;
+  padding: 60px 7%;
+  background: linear-gradient(135deg,#e7f7f7,#edf4ff);
+}
+
+.tag {
+  display: inline-block;
+  background: #d5f4ef;
+  color: #087c73;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: .85rem;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: clamp(2.3rem,5vw,4.3rem);
+  line-height: 1.05;
+  margin: 18px 0;
+}
+
+h1 span {
+  color: var(--teal);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #486581;
+}
+
+.hero img {
+  width: 100%;
+  border-radius: 22px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--blue);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: var(--teal);
+}
+
+section {
+  padding: 55px 7%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-title h2 {
+  font-size: 2rem;
+}
+
+.section-title p {
+  color: #627d98;
+  line-height: 1.6;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px #102a4310;
+}
+
+.emoji {
+  font-size: 2.2rem;
+}
+
+.card h3 {
+  margin: 12px 0 8px;
+}
+
+.card p {
+  color: #627d98;
+  line-height: 1.6;
+}
+
+/* SECCIÓN DE CONSULTAS */
+
+.consultas {
+  background: white;
+}
+
+.consulta-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+}
+
+.consulta {
+  padding: 25px;
+  border: 1px solid #dce6ed;
+  border-radius: 15px;
+  background: #fbfdff;
+}
+
+.consulta h3 {
+  color: var(--blue);
+}
+
+.consulta p {
+  color: #627d98;
+  line-height: 1.6;
+}
+
+.consulta ul {
+  padding-left: 20px;
+  line-height: 1.9;
+}
+
+/* COTIZACIÓN */
+
+.presupuesto {
+  background: #e7f7f7;
+  text-align: center;
+}
+
+.presupuesto p {
+  max-width: 750px;
+  margin: 15px auto;
+  line-height: 1.7;
+}
+
+.presupuesto-box {
+  max-width: 750px;
+  margin: 25px auto 0;
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  text-align: left;
+}
+
+.presupuesto-box li {
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+/* FUNCIONAMIENTO */
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 15px;
+}
+
+.paso {
+  text-align: center;
+  background: white;
+  padding: 20px 12px;
+  border-radius: 14px;
+}
+
+.numero {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  background: var(--teal);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.paso p {
+  color: #627d98;
+  line-height: 1.5;
+  font-size: .95rem;
+}
+
+/* EQUIPO */
+
+.about {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+}
+
+.about p {
+  max-width: 760px;
+  margin: 12px auto;
+  color: #d9e8f2;
+  line-height: 1.7;
+}
+
+.equipo ul {
+  list-style: none;
+  padding: 0;
+  line-height: 2;
+  color: #d9e8f2;
+}
+
+footer {
+  text-align: center;
+  padding: 22px;
+  background: #071c2c;
+  color: #cbd5e1;
+  font-size: .9rem;
+}
+
+@media(max-width:850px) {
+  .cards,
+  .consulta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:550px) {
+  header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  nav {
+    text-align: center;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 6px;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">Viaja<span>Más</span> ✈</div>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#nosotros">Nosotros</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero" id="inicio">
-      <div>
-        <span class="tag">Tu próxima aventura comienza aquí</span>
-        <h1>Descubre el mundo.<br><span>Vive el viaje.</span></h1>
-        <p>En ViajaMás te ayudamos a planear experiencias inolvidables. Explora destinos, compara opciones y organiza tu viaje de acuerdo con tus gustos y presupuesto.</p>
-        <a class="btn" href="#servicios">Explorar servicios</a>
-      </div>
-      <img src="img/destinos.svg" alt="Ilustración de un destino turístico con montañas, mar y avión">
-    </section>
+<header>
+  <div class="logo">Viaja<span>Más</span> ✈</div>
 
-    <section id="servicios">
-      <div class="section-title">
-        <h2>Planea tu viaje ideal</h2>
-        <p>Un prototipo de sistema para organizar los componentes de tu viaje.</p>
-      </div>
-      <div class="cards">
-        <article class="card">
-          <div class="emoji">✈️</div>
-          <h3>Vuelos</h3>
-          <p>Consulta opciones de vuelos, aerolíneas, horarios y tarifas para elegir la alternativa que mejor se adapte a tu viaje.</p>
-        </article>
-        <article class="card">
-          <div class="emoji">🏨</div>
-          <h3>Hospedaje</h3>
-          <p>Explora hoteles y alojamientos, revisa servicios, calificaciones y costos para encontrar dónde hospedarte.</p>
-        </article>
-        <article class="card">
-          <div class="emoji">🗺️</div>
-          <h3>Atracciones</h3>
-          <p>Descubre actividades y lugares turísticos, consulta sus precios y agrega experiencias a tu itinerario.</p>
-        </article>
-      </div>
-    </section>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#consultas">Opciones</a>
+    <a href="#presupuesto">Presupuesto</a>
+    <a href="#nosotros">Equipo</a>
+  </nav>
+</header>
 
-    <section class="about" id="nosotros">
-      <h2>Acerca de ViajaMás</h2>
-      <p>Somos una agencia de viajes enfocada en facilitar la planeación de experiencias. Nuestro prototipo integra vuelos, hospedaje y atracciones para ayudar al viajero a comparar alternativas y estimar el presupuesto de su viaje.</p>
-     <div class="equipo">
-    <p><strong>Proyecto de Ingeniería de Software · Equipo 7</strong></p>
+<main>
+
+<!-- INICIO -->
+
+<section class="hero" id="inicio">
+  <div>
+    <span class="tag">Tu próxima aventura comienza aquí</span>
+
+    <h1>
+      Descubre el mundo.<br>
+      <span>Vive el viaje.</span>
+    </h1>
+
+    <p>
+      En ViajaMás te ayudamos a planear experiencias
+      inolvidables. Explora destinos, compara opciones
+      y organiza tu viaje de acuerdo con tus gustos
+      y presupuesto.
+    </p>
+
+    <a class="btn" href="#servicios">
+      Explorar servicios
+    </a>
+  </div>
+
+  <img src="img/destinos.svg"
+       alt="Ilustración de un destino turístico">
+</section>
+
+<!-- SERVICIOS -->
+
+<section id="servicios">
+
+  <div class="section-title">
+    <h2>Planea tu viaje ideal</h2>
+    <p>
+      Conoce los principales servicios que integran
+      nuestro sistema de agencia de viajes.
+    </p>
+  </div>
+
+  <div class="cards">
+
+    <article class="card">
+      <div class="emoji">✈️</div>
+      <h3>Vuelos</h3>
+      <p>
+        Consulta alternativas de vuelos, aerolíneas,
+        horarios, fechas y tarifas para encontrar
+        opciones adecuadas a tu viaje.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🏨</div>
+      <h3>Hospedaje</h3>
+      <p>
+        Explora opciones de alojamiento, habitaciones,
+        servicios, calificaciones y precios por noche.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🗺️</div>
+      <h3>Atracciones</h3>
+      <p>
+        Descubre actividades y lugares turísticos,
+        consulta sus características, horarios
+        y precios de entrada.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- CONSULTAS -->
+
+<section class="consultas" id="consultas">
+
+  <div class="section-title">
+    <h2>Opciones para tu viaje</h2>
+    <p>
+      El sistema organiza la información necesaria
+      para facilitar la selección de alternativas.
+    </p>
+  </div>
+
+  <div class="consulta-grid">
+
+    <article class="consulta">
+      <h3>✈️ Consulta de vuelos</h3>
+      <p>
+        Se consideran los siguientes datos:
+      </p>
+      <ul>
+        <li>Origen y destino.</li>
+        <li>Fecha de salida y llegada.</li>
+        <li>Aerolínea.</li>
+        <li>Horarios disponibles.</li>
+        <li>Tarifas y disponibilidad.</li>
+      </ul>
+    </article>
+
+    <article class="consulta">
+      <h3>🏨 Consulta de hospedaje</h3>
+      <p>
+        Se analizan distintas alternativas:
+      </p>
+      <ul>
+        <li>Nombre y ubicación del hotel.</li>
+        <li>Tipo de habitación.</li>
+        <li>Servicios disponibles.</li>
+        <li>Precio por noche.</li>
+        <li>Disponibilidad y capacidad.</li>
+      </ul>
+    </article>
+
+    <article class="consulta">
+      <h3>🎡 Consulta de atracciones</h3>
+      <p>
+        Se identifican actividades de interés:
+      </p>
+      <ul>
+        <li>Nombre de la atracción.</li>
+        <li>Ubicación y categoría.</li>
+        <li>Descripción.</li>
+        <li>Horarios de visita.</li>
+        <li>Precio de entrada.</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<!-- PRESUPUESTO -->
+
+<section class="presupuesto" id="presupuesto">
+
+  <div class="section-title">
+    <h2>Comparación y presupuesto</h2>
+    <p>
+      Una vez consultadas las alternativas, el sistema
+      permite comparar los costos para elaborar
+      un presupuesto estimado del viaje.
+    </p>
+  </div>
+
+  <div class="presupuesto-box">
+    <h3>Elementos considerados en la cotización</h3>
+
     <ul>
-        <li>Martínez Reyes Osvaldo Jair</li>
-        <li>Tapia Aguilar José de Jesús</li>
-        <li>Vilchis Cruz Edgar Leonardo</li>
+      <li><strong>Vuelos:</strong> tarifas de las opciones seleccionadas.</li>
+      <li><strong>Hospedaje:</strong> costo por noche y duración de la estancia.</li>
+      <li><strong>Atracciones:</strong> precios de las actividades elegidas.</li>
+      <li><strong>Presupuesto:</strong> comparación del costo estimado con el monto disponible.</li>
     </ul>
-</div>
-    </section>
-  </main>
 
-  <footer>© 2026 ViajaMás · Prototipo académico de agencia de viajes</footer>
+    <p>
+      El resultado permite presentar alternativas
+      organizadas para apoyar al viajero en la
+      toma de decisiones.
+    </p>
+  </div>
+
+</section>
+
+<!-- FUNCIONAMIENTO -->
+
+<section id="funcionamiento">
+
+  <div class="section-title">
+    <h2>¿Cómo funciona nuestro sistema?</h2>
+    <p>
+      El proceso general de planificación del viaje
+      se desarrolla mediante las siguientes etapas.
+    </p>
+  </div>
+
+  <div class="pasos">
+
+    <article class="paso">
+      <span class="numero">1</span>
+      <h3>Solicitud</h3>
+      <p>
+        El viajero proporciona destino,
+        fechas y presupuesto.
+      </p>
+    </article>
+
+    <article class="paso">
+      <span class="numero">2</span>
+      <h3>Consulta</h3>
+      <p>
+        Se revisan opciones de vuelos,
+        hospedaje y atracciones.
+      </p>
+    </article>
+
+    <article class="paso">
+      <span class="numero">3</span>
+      <h3>Comparación</h3>
+      <p>
+        Se analizan las alternativas
+        y sus respectivos costos.
+      </p>
+    </article>
+
+    <article class="paso">
+      <span class="numero">4</span>
+      <h3>Cotización</h3>
+      <p>
+        Se calcula el presupuesto
+        estimado del viaje.
+      </p>
+    </article>
+
+    <article class="paso">
+      <span class="numero">5</span>
+      <h3>Selección</h3>
+      <p>
+        El viajero elige las opciones
+        de su preferencia.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- EQUIPO -->
+
+<section class="about" id="nosotros">
+
+  <h2>Acerca de ViajaMás</h2>
+
+  <p>
+    ViajaMás es un proyecto académico enfocado en
+    el desarrollo conceptual de un sistema para
+    agencias de viajes. Su propósito es integrar
+    información de vuelos, hospedaje y atracciones,
+    facilitando la comparación de alternativas
+    y la elaboración de presupuestos.
+  </p>
+
+  <div class="equipo">
+
+    <p>
+      <strong>
+        Proyecto de Ingeniería de Software · Equipo 7
+      </strong>
+    </p>
+
+    <ul>
+      <li>Martínez Reyes Osvaldo Jair</li>
+      <li>Tapia Aguilar José de Jesús</li>
+      <li>Vilchis Cruz Edgar Leonardo</li>
+    </ul>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  © 2026 ViajaMás · Proyecto académico de Ingeniería de Software · Equipo 7
+</footer>
+
 </body>
 </html>
+
