@@ -137,10 +137,37 @@ section {
 }
 
 .card {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px #102a4310;
+ 
+/* FONDO DE LA TARJETA DE VUELOS */
+
+.card-vuelos {
+  background-image:
+    linear-gradient(
+      rgba(16, 42, 67, 0.65),
+      rgba(16, 42, 67, 0.65)
+    ),
+    url("img/nubes.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: white;
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-vuelos h3 {
+  color: white;
+}
+
+.card-vuelos p {
+  color: white;
+}
+
 }
 
 .emoji {
@@ -373,15 +400,21 @@ footer {
 
   <div class="cards">
 
-    <article class="card">
-      <div class="emoji">✈️</div>
-      <h3>Vuelos</h3>
-      <p>
-        Consulta alternativas de vuelos, aerolíneas,
-        horarios, fechas y tarifas para encontrar
-        opciones adecuadas a tu viaje.
-      </p>
-    </article>
+   
+<article class="card card-vuelos">
+
+  <div class="emoji">✈️</div>
+
+  <h3>Vuelos</h3>
+
+  <p>
+    Consulta alternativas de vuelos, aerolíneas,
+    horarios, fechas y tarifas para encontrar
+    opciones adecuadas a tu viaje.
+  </p>
+
+</article>
+
 
     <article class="card">
       <div class="emoji">🏨</div>
