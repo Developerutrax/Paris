@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -422,8 +421,6 @@ section {
   margin-top: 12px;
 }
 
-/* COTIZACIÓN PREVIA */
-
 .cotizacion-box {
   padding: 25px;
   background: linear-gradient(135deg, #e7f7f7, #edf4ff);
@@ -821,8 +818,6 @@ footer {
 
 </div>
 
-<!-- PÁGINA DE REGISTRO -->
-
 <div id="paginaRegistro" hidden>
 
 <header>
@@ -845,8 +840,6 @@ footer {
   <div class="registro-box">
 
     <form class="registro-form" id="formRegistro">
-
-      <!-- IDENTIFICACIÓN DEL CLIENTE -->
 
       <fieldset class="seccion-registro">
         <legend>Identificación del cliente</legend>
@@ -905,8 +898,6 @@ footer {
 
         </div>
       </fieldset>
-
-      <!-- DATOS DEL TITULAR -->
 
       <fieldset class="seccion-registro">
         <legend>Datos personales y del viaje</legend>
@@ -1086,8 +1077,6 @@ footer {
         ></div>
       </fieldset>
 
-      <!-- VUELOS -->
-
       <fieldset class="seccion-registro">
         <legend>Vuelos</legend>
 
@@ -1141,8 +1130,6 @@ footer {
           </div>
         </div>
       </fieldset>
-
-      <!-- HOSPEDAJE -->
 
       <fieldset class="seccion-registro">
         <legend>Hospedaje</legend>
@@ -1208,8 +1195,6 @@ footer {
         </div>
       </fieldset>
 
-      <!-- ATRACCIONES -->
-
       <fieldset class="seccion-registro">
         <legend>Atracciones</legend>
 
@@ -1255,8 +1240,6 @@ footer {
 
         </div>
       </fieldset>
-
-      <!-- COTIZACIÓN PREVIA -->
 
       <div class="cotizacion-box" id="cotizacion">
         <h2>💰 Cotización estimada de tu viaje</h2>
@@ -1316,8 +1299,6 @@ footer {
           confirmada ni un precio comercial definitivo.
         </p>
       </div>
-
-      <!-- BOTONES -->
 
       <div class="botones-registro">
         <button
@@ -2005,7 +1986,6 @@ camposCotizacion.forEach(id => {
   campo.addEventListener("change", actualizarCotizacion);
 });
 
-// Mostrar una cotización inicial.
 actualizarCotizacion();
 
 function agregarTextoPDF(doc, texto, x, y, anchoMaximo = 175, salto = 7) {
@@ -2040,7 +2020,6 @@ function generarFacturaPDF(agente, numeroCliente) {
   const servicios = obtenerValor("serviciosExtra");
   const atraccion = obtenerValor("tipoAtraccion");
 
-  // Utilizar los mismos cálculos que aparecen en la cotización.
   const costos = calcularCostosViaje();
 
   const costoVuelo = costos.costoVuelo;
@@ -2142,7 +2121,6 @@ function generarFacturaPDF(agente, numeroCliente) {
 
   y += 10;
 
-  // Datos exclusivos del titular.
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
   doc.text("DATOS DEL TITULAR", margen, y);
@@ -2355,7 +2333,6 @@ function generarFacturaPDF(agente, numeroCliente) {
     y = 20;
   }
 
-  // El agente aparece únicamente en el PDF.
   doc.setFillColor(244, 248, 251);
   doc.roundedRect(margen, y - 5, 174, 18, 3, 3, "F");
 
@@ -2404,6 +2381,53 @@ document.getElementById("formRegistro").addEventListener(
       return;
     }
 
+    // EL TITULAR DEBE TENER 18 AÑOS O MÁS.
+    const edadTitular = Number(obtenerValor("edad"));
+
+    if (edadTitular < 18) {
+      alert("Registro no permitido: el titular debe tener al menos 18 años para realizar la solicitud de viaje.");
+      document.getElementById("edad").focus();
+      return;
+    }
+
+    // EL TITULAR DEBE CONTAR CON PASAPORTE.
+    if (
+      obtenerValor("titularTienePasaporte") !== "si" ||
+      !obtenerValor("pasaporte").trim()
+    ) {
+      alert("Aviso: el titular debe tramitar y contar con un pasaporte vigente antes de realizar el viaje. No se puede completar la solicitud sin este documento.");
+      document.getElementById("titularTienePasaporte").focus();
+      return;
+    }
+
+    // TODOS LOS ACOMPAÑANTES DEBEN CONTAR CON PASAPORTE.
+    const cantidad = Number(obtenerValor("viajeros"));
+
+    for (let i = 2; i <= cantidad; i++) {
+      const tienePasaporte = obtenerValor("acompananteTienePasaporte" + i);
+      const numeroPasaporte = obtenerValor("acompanantePasaporte" + i).trim();
+
+      if (tienePasaporte !== "si" || !numeroPasaporte) {
+        alert("Aviso: el viajero " + i + " debe tramitar y contar con un pasaporte vigente antes del viaje. No se puede completar la solicitud mientras falte este documento.");
+
+        document.getElementById(
+          "acompananteTienePasaporte" + i
+        ).focus();
+
+        return;
+      }
+    }
+
+    // CONFIRMACIÓN SOBRE REQUISITOS Y CONDICIONES.
+    const avisoCondiciones =
+      "Antes de continuar, confirma que todos los viajeros cuentan con pasaporte vigente y que revisarán los requisitos migratorios del destino.\n\n" +
+      "La agencia no puede garantizar la admisión al destino ni sustituir los requisitos oficiales. Las condiciones de cancelación y reembolso deben consultarse en los términos aplicables antes de contratar.\n\n" +
+      "¿Deseas continuar con la solicitud?";
+
+    if (!confirm(avisoCondiciones)) {
+      return;
+    }
+
     if (
       esClienteSelect.value === "si" &&
       !clienteEncontrado
@@ -2426,7 +2450,6 @@ document.getElementById("formRegistro").addEventListener(
       numeroCliente = generarNumeroCliente();
     }
 
-    // Actualizar los datos personales del titular.
     if (!guardarDatosCliente(numeroCliente)) {
       return;
     }
@@ -2470,7 +2493,6 @@ document.getElementById("formRegistro").addEventListener(
         generarAcompanantes(0);
         generarAsientos(0);
 
-        // Restablecer la cotización después de limpiar el formulario.
         actualizarCotizacion();
 
         mostrarInicio();
